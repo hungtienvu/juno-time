@@ -8,7 +8,9 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
   </head>
   <body>
     <section class="page-header">
@@ -19,12 +21,43 @@
 		
 		<script type="text/javascript">
 				var d = new Date();
+				var date = d.getDate();
+				var month = d.getMonth() + 1;
+				month = '0' + month;
+				var year = d.getFullYear();
+				var lastDate = new Date(year,month,0);
+
+				lastDate = lastDate.getDate();
+
 				
-				jQuery("h4").html(d.getMonth());
+
+				jQuery(document).ready(function($) {
+					
+					 jQuery('.submit').click(function(event) {
+					 	/* Act on the event */
+					 		var username = jQuery('.username').val();
+					 		if(username){
+					 		var upworkLink = 
+				'https://www.upwork.com/reports/timeanalyze#provider/'+username+'/'+year+month+'01,'+year+month+lastDate+'/month_worked_on/hours';
+							}else{
+								username = "Hung Vu";
+								var upworkLink = 
+				'https://www.upwork.com/reports/timeanalyze#provider/hungjuno/'+year+month+'01,'+year+month+lastDate+'/month_worked_on/hours';
+							}
+							jQuery('h4 a').attr('href', upworkLink).html('Hi ! ' + username + '<br>Your total time on '+ month);
+					 });
+
+				});
+				
 		</script>
 
+			<form action="#" method="post" id="form">
+						<h3>Enter Upwork username:</h3>
+						<input type="text" name="username" class="username"/>
+						<a href="#" class="submit">Get time</a>
+			</form>
 			<h4>
-				
+				<a href="" target="_blank"></a>
 			</h4>
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/stevevutien/juno-time">Juno-time</a> is maintained by <a href="https://github.com/stevevutien">stevevutien</a>.</span>
